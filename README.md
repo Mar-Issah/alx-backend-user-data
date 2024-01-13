@@ -7,3 +7,4 @@ ALX_Africa | Holberton school specialization programme
 ![Latest commit](https://img.shields.io/github/last-commit/Mar-Issah/alx-backend-user-data/master?style=round-square)
 
 ## Projects
+- 0x00-personal_data
