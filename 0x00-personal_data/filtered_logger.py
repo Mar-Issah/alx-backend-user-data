@@ -43,15 +43,14 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     host = environ.get("PERSONAL_DATA_DB_HOST", "localhost")
     db_name = environ.get("PERSONAL_DATA_DB_NAME")
 
-    connector  = mysql.connector.connection.MySQLConnection(user=username,
-                                                     password=password,
-                                                     host=host,
-                                                     database=db_name)
+    connector = mysql.connector.connection.MySQLConnection(
+        user=username, password=password, host=host, database=db_name)
     return connector
 
 
 def main():
-    """ obtain a database connection using get_db and retrieve and display all rows in the users table"""
+    """ obtain a database connection using get_db and retrieve and
+    display all rows in the users table"""
 
     db = get_db()
     cursor = db.cursor()
