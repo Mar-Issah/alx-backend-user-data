@@ -12,11 +12,11 @@ class Auth:
          Validates whether an endpoint requires authentication.
 
         Parameters:
-        - path (str): The path of the endpoint to be checked for authentication requirements.
-        - excluded_paths (List[str]): List of paths that are excluded from authentication checks.
+        - path (str): The path of the endpoint to be checked for auth req.
+        - excluded_paths (List[str]): List of paths  excl from auth checks
 
         Returns:
-        - bool: True if authentication is required for the given path, False otherwise.
+        - bool: True if auth is req for the given path, False otherwise.
 
         """
         if path is None or excluded_paths is None or excluded_paths == []:
