@@ -12,7 +12,15 @@ class BasicAuth(Auth):
 
     def extract_base64_authorization_header(self,
                                             authorization_header: str) -> str:
-        """ Extract Base 64 Authorization Header """
+        """ Extract Base 64 Authorization Header
+
+        Parameters:
+        - authorization_header (str): The Authorization header
+
+        Returns:
+        - str: The Base64-encoded content
+
+        """
 
         if authorization_header is None:
             return None
@@ -24,13 +32,18 @@ class BasicAuth(Auth):
             return None
 
         encoded = authorization_header.split(' ', 1)[1]
-
         return encoded
 
     def decode_base64_authorization_header(self,
                                            base64_authorization_header: str
                                            ) -> str:
-        """ Decodes the value of a base64 string """
+        """ Decodes the value of a base64 string
+        Parameters:
+        - base64_authorization_header (str): The Base64-encoded content
+
+        Returns:
+        - str: The decoded content.
+        """
         if base64_authorization_header is None:
             return None
         if not isinstance(base64_authorization_header, str):
