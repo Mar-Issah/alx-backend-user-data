@@ -31,7 +31,7 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> User:
         """ Adds a user to the database.
 
-        Parameters:
+        Param:
         - email (str): The email address of the user.
         - hashed_password (str): The hashed password of the user.
 
