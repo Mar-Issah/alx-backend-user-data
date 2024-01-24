@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Class User for ORM"""
+""" SQLAlchemy model named User"""
 
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
