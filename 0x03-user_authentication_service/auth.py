@@ -94,30 +94,37 @@ class Auth:
         self._db.update_user(user.id, session_id=session_id)
         return session_id
 
-    # def get_user_from_session_id(self, session_id: str) -> Union[str, None]:
-    #     """It takes a single session_id string argument
-    #     Returns a string or None
-    #     """
-    #     if session_id is None:
-    #         return None
+    def get_user_from_session_id(self, session_id: str) -> Union[str, None]:
+        """It takes a single session_id string argument
 
-    #     try:
-    #         user = self._db.find_user_by(session_id=session_id)
-    #     except NoResultFound:
-    #         return None
+        Param:
+        session_id(int)- The session id of the user
+        Returns a string or None
+        """
+        if session_id is None:
+            return None
 
-    #     return user
+        try:
+            user = self._db.find_user_by(session_id=session_id)
+        except NoResultFound:
+            return None
 
-    # def destroy_session(self, user_id: int) -> None:
-    #     """Updates the corresponding user's session ID to None"""
-    #     try:
-    #         user = self._db.find_user_by(id=user_id)
-    #     except NoResultFound:
-    #         return None
+        return user
 
-    #     self._db.update_user(user.id, session_id=None)
+    def destroy_session(self, user_id: int) -> None:
+        """Updates the corresponding user's session ID to None
+        Param:
+        user_id(int)- The id of the user
 
-    #     return None
+        Returns: None
+        """
+        try:
+            user = self._db.find_user_by(id=user_id)
+        except NoResultFound:
+            return None
+
+        self._db.update_user(user.id, session_id=None)
+        return None
 
     # def get_reset_password_token(self, email: str) -> str:
     #     """Generates a reset password token if user exists"""
