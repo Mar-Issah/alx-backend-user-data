@@ -22,6 +22,7 @@ def hello_world() -> str:
 @app.route('/users', methods=['POST'])
 def register_user() -> str:
     """Registers a new user if it does not exist"""
+
     try:
         email = request.form['email']
         password = request.form['password']
