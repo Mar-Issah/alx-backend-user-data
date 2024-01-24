@@ -43,24 +43,25 @@ class DB:
         self._session.commit()
         return user
 
-    # def find_user_by(self, **kwargs) -> User:
-    #     """ Finds user by key word args
-    #     Return: First row found in the users table as filtered by kwargs
-    #     """
-    #     if not kwargs:
-    #         raise InvalidRequestError
+    def find_user_by(self, **kwargs) -> User:
+        """ Finds user using key-word args
 
-    #     column_names = User.__table__.columns.keys()
-    #     for key in kwargs.keys():
-    #         if key not in column_names:
-    #             raise InvalidRequestError
+            Return: First row found in the users table
+        """
+        if not kwargs:
+            raise InvalidRequestError
 
-    #     user = self._session.query(User).filter_by(**kwargs).first()
+        col_names = User.__table__.columns.keys()
 
-    #     if user is None:
-    #         raise NoResultFound
+        for key in kwargs.keys():
+            if key not in col_names:
+                raise InvalidRequestError
 
-    #     return user
+        user = self._session.query(User).filter_by(**kwargs).first()
+
+        if user is None:
+            raise NoResultFound
+        return user
 
     # def update_user(self, user_id: int, **kwargs) -> None:
     #     """ Update users attributes
