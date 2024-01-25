@@ -74,22 +74,21 @@ def log_out() -> str:
     return redirect('/')
 
 
-# @app.route('/profile', methods=['GET'])
-# def profile() -> str:
-#     """ If the user exist, respond with a 200 HTTP status and a JSON Payload
-#     Otherwise respond with a 403 HTTP status.
-#     """
-#     session_id = request.cookies.get("session_id", None)
+@app.route('/profile', methods=['GET'])
+def profile() -> str:
+    """ GET /profile route.
+    """
+    session_id = request.cookies.get("session_id", None)
 
-#     if session_id is None:
-#         abort(403)
+    if session_id is None:
+        abort(403)
 
-#     user = AUTH.get_user_from_session_id(session_id)
+    user = AUTH.get_user_from_session_id(session_id)
 
-#     if user is None:
-#         abort(403)
-#     message = {"email": user.email}
-#     return jsonify(message), 200
+    if user is None:
+        abort(403)
+    message = {"email": user.email}
+    return jsonify(message), 200
 
 
 # @app.route('/reset_password', methods=['POST'])
