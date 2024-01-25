@@ -110,10 +110,10 @@ def reset_password() -> str:
     return jsonify(message), 200
 
 
-# @app.route('/reset_password', methods=['PUT'])
-# def update_password() -> str:
+@app.route('/reset_password', methods=['PUT'])
+def update_password() -> str:
     """ PUT /reset_password
-    Updates password with reset token
+
     Return:
         - 400 if bad request
         - 403 if not valid reset token
