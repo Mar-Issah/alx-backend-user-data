@@ -58,25 +58,20 @@ def log_in() -> str:
     return response
 
 
-# @app.route('/sessions', methods=['DELETE'])
-# def log_out() -> str:
-#     """Find the user with the requested session ID.
-#     If the user exists destroy the session and redirect the user to GET /.
-#     If the user does not exist, respond with a 403 HTTP status.
-#     """
-#     session_id = request.cookies.get("session_id", None)
+@app.route('/sessions', methods=['DELETE'])
+def log_out() -> str:
+    """DELETE /sessions route.
+    """
+    session_id = request.cookies.get("session_id", None)
+    if session_id is None:
+        abort(403)
 
-#     if session_id is None:
-#         abort(403)
+    user = AUTH.get_user_from_session_id(session_id)
+    if user is None:
+        abort(403)
 
-#     user = AUTH.get_user_from_session_id(session_id)
-
-#     if user is None:
-#         abort(403)
-
-#     AUTH.destroy_session(user.id)
-
-#     return redirect('/')
+    AUTH.destroy_session(user.id)
+    return redirect('/')
 
 
 # @app.route('/profile', methods=['GET'])
@@ -93,10 +88,8 @@ def log_in() -> str:
 
 #     if user is None:
 #         abort(403)
-
-#     msg = {"email": user.email}
-
-#     return jsonify(msg), 200
+#     message = {"email": user.email}
+#     return jsonify(message), 200
 
 
 # @app.route('/reset_password', methods=['POST'])
