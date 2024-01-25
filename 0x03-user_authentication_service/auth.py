@@ -126,30 +126,37 @@ class Auth:
         self._db.update_user(user.id, session_id=None)
         return None
 
-    # def get_reset_password_token(self, email: str) -> str:
-    #     """Generates a reset password token if user exists"""
-    #     try:
-    #         user = self._db.find_user_by(email=email)
-    #     except NoResultFound:
-    #         raise ValueError
+    def get_reset_password_token(self, email: str) -> str:
+        """Generates a reset password token if user exists
 
-    #     reset_token = _generate_uuid()
+        Param:
+        email (string) - The email of the user
 
-    #     self._db.update_user(user.id, reset_token=reset_token)
+        Return: reset token
 
-    #     return reset_token
+        """
+        try:
+            user = self._db.find_user_by(email=email)
+        except NoResultFound:
+            raise ValueError
 
-    # def update_password(self, reset_token: str, password: str) -> None:
-    #     """Uses reset token to validate update of users password"""
-    #     if reset_token is None or password is None:
-    #         return None
+        reset_token = _generate_uuid()
 
-    #     try:
-    #         user = self._db.find_user_by(reset_token=reset_token)
-    #     except NoResultFound:
-    #         raise ValueError
+        self._db.update_user(user.id, reset_token=reset_token)
 
-    #     hashed_password = _hash_password(password)
-    #     self._db.update_user(user.id,
-    #                          hashed_password=hashed_password,
-    #                          reset_token=None)
+        return reset_token
+
+    def update_password(self, reset_token: str, password: str) -> None:
+        """Uses reset token to validate update of users password"""
+        if reset_token is None or password is None:
+            return None
+
+        try:
+            user = self._db.find_user_by(reset_token=reset_token)
+        except NoResultFound:
+            raise ValueError
+
+        hashed_password = _hash_password(password)
+        self._db.update_user(user.id,
+                             hashed_password=hashed_password,
+                             reset_token=None)
